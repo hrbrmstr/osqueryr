@@ -1,0 +1,62 @@
+---
+output: rmarkdown::github_document
+---
+
+# osqueryr
+
+'osquery' Interface for R
+
+## WIP WIP WIP
+
+Not everything works.
+
+NOTE: You need to install `osquery` for this to work. 
+
+Read <https://osquery.readthedocs.io/en/stable/> before proceeding.
+
+## Description
+
+'osquery' <https://osquery.readthedocs.io/en/stable/> is an operating 
+system instrumentation framework for 'Windows', 'OS X (macOS)', 'Linux', and 
+'FreeBSD'. The tools make low-level operating system analytics and monitoring 
+both performant and intuitive. A full 'dbplyr'-compliant 'DBI'-driver 
+interface is provided facilitating intuitive and tidy analytic idioms.
+  
+## What's Inside The Tin
+
+The following functions are implemented:
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/osqueryr")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+options(width=120)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(osqueryr)
+library(tidyverse)
+
+# current verison
+packageVersion("osqueryr")
+
+```
+
+```{r}
+osqdb <- src_dbi(osqueryr::dbConnect(Osquery()))
+
+osqdb
+
+tbl(osqdb, "dns_resolvers")
+
+glimpse(tbl(osqdb, "osquery_info"))
+
+tbl(osqdb, "processes") %>% 
+  filter(name %like% '%fire%') %>% 
+  glimpse()
+```

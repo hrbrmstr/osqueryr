@@ -1,0 +1,33 @@
+Package: osqueryr
+Type: Package
+Title: 'osquery' Interface for R
+Version: 0.1.0
+Date: 2018-05-25
+Authors@R: c(
+    person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
+           comment = c(ORCID = "0000-0001-5670-2640"))
+  )
+Maintainer: Bob Rudis <bob@rud.is>
+Description: 'osquery' <https://osquery.readthedocs.io/en/stable/> is an operating 
+    system instrumentation framework for 'Windows', 'OS X (macOS)', 'Linux', and 
+    'FreeBSD'. The tools make low-level operating system analytics and monitoring 
+    both performant and intuitive. A full 'dbplyr'-compliant 'DBI'-driver 
+    interface is provided facilitating intuitive and tidy analytic idioms.
+URL: https://github.com/hrbrmstr/osqueryr
+BugReports: https://github.com/hrbrmstr/osqueryr/issues
+SystemRequirements: osquery
+Encoding: UTF-8
+License: MIT + file LICENSE
+Suggests:
+    testthat,
+    covr
+Depends:
+    R (>= 3.2.0),
+    dbplyr
+Imports:
+    DBI (>= 0.3.0),
+    methods,
+    sys,
+    jsonlite,
+    stringi
+RoxygenNote: 6.0.1.9000
