@@ -1,7 +1,7 @@
 
 # osqueryr
 
-‘osquery’ Interface for R
+‘osquery’ ‘DBI’ and ‘dbplyr’ Interface for R
 
 ## WIP WIP WIP
 
@@ -94,9 +94,9 @@ glimpse(tbl(osqdb, "osquery_info"))
     ## $ config_hash    <chr> ""
     ## $ config_valid   <chr> "0"
     ## $ extensions     <chr> "inactive"
-    ## $ instance_id    <chr> "3cafd7dc-0660-4fc2-8b5f-985c1403505b"
-    ## $ pid            <chr> "65971"
-    ## $ start_time     <chr> "1527281019"
+    ## $ instance_id    <chr> "11aa67c3-ab12-4e8d-aa2f-93d366cc7c1e"
+    ## $ pid            <chr> "66142"
+    ## $ start_time     <chr> "1527281377"
     ## $ uuid           <chr> "3A087DAC-6414-5FA9-9E10-42EE9CED7C25"
     ## $ version        <chr> "3.2.4"
     ## $ watcher        <chr> "-1"
@@ -111,8 +111,8 @@ tbl(osqdb, "processes") %>%
     ## Variables: 26
     ## $ cmdline            <chr> "/Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox -foreground"
     ## $ cwd                <chr> "/"
-    ## $ disk_bytes_read    <chr> "528154624"
-    ## $ disk_bytes_written <chr> "7941632000"
+    ## $ disk_bytes_read    <chr> "531906560"
+    ## $ disk_bytes_written <chr> "7964819456"
     ## $ egid               <chr> "20"
     ## $ euid               <chr> "502"
     ## $ gid                <chr> "20"
@@ -123,15 +123,15 @@ tbl(osqdb, "processes") %>%
     ## $ path               <chr> "/Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox"
     ## $ pgroup             <chr> "72338"
     ## $ pid                <chr> "72338"
-    ## $ resident_size      <chr> "1352925184"
+    ## $ resident_size      <chr> "1341915136"
     ## $ root               <chr> ""
     ## $ sgid               <chr> "20"
     ## $ start_time         <chr> "355188"
     ## $ state              <chr> "R"
     ## $ suid               <chr> "502"
-    ## $ system_time        <chr> "834194"
-    ## $ threads            <chr> "98"
-    ## $ total_size         <chr> "1006518272"
+    ## $ system_time        <chr> "838119"
+    ## $ threads            <chr> "85"
+    ## $ total_size         <chr> "998281216"
     ## $ uid                <chr> "502"
-    ## $ user_time          <chr> "1970725"
+    ## $ user_time          <chr> "1978636"
     ## $ wired_size         <chr> "0"

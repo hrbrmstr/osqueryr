@@ -1,6 +1,6 @@
 Package: osqueryr
 Type: Package
-Title: 'osquery' Interface for R
+Title: 'osquery' 'DBI' and 'dbplyr' Interface for R
 Version: 0.1.0
 Date: 2018-05-25
 Authors@R: c(

@@ -4,7 +4,7 @@ output: rmarkdown::github_document
 
 # osqueryr
 
-'osquery' Interface for R
+'osquery' 'DBI' and 'dbplyr' Interface for R
 
 ## WIP WIP WIP
 
