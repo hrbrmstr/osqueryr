@@ -31,3 +31,10 @@ Imports:
     jsonlite,
     stringi
 RoxygenNote: 6.0.1.9000
+Collate: 
+    'dbplyr-helpers.R'
+    'osqueryr-driver.R'
+    'osqueryr-connection.R'
+    'osqueryr-package.R'
+    'osqueryr-result.R'
+    'utils.R'

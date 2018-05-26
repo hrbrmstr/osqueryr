@@ -8,7 +8,7 @@ output: rmarkdown::github_document
 
 ## WIP WIP WIP
 
-Not everything works.
+But, so far it seems to work pretty well.
 
 NOTE: You need to install `osquery` for this to work. 
 
@@ -41,22 +41,102 @@ options(width=120)
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 library(osqueryr)
 library(tidyverse)
+library(knitr)
 
 # current verison
 packageVersion("osqueryr")
 
 ```
 
+### osquery info
+
 ```{r}
 osqdb <- src_dbi(osqueryr::dbConnect(Osquery()))
 
-osqdb
-
-tbl(osqdb, "dns_resolvers")
-
 glimpse(tbl(osqdb, "osquery_info"))
+```
 
-tbl(osqdb, "processes") %>% 
-  filter(name %like% '%fire%') %>% 
+### available tables
+
+```{r}
+osqdb
+```
+
+### sample table
+
+```{r}
+tbl(osqdb, "dns_resolvers")
+```
+
+### check out processes
+
+```{r}
+procs <- tbl(osqdb, "processes")
+
+filter(procs, cmdline != "") %>% 
+  select(cmdline, total_size)
+
+filter(procs, name %like% '%fire%') %>% 
   glimpse()
+```
+
+see if any processes have no corresponding disk image
+
+```{r}
+filter(procs, on_disk == 0) %>% 
+  select(name, path, pid)
+```
+
+(gosh I hope ^^ was empty)
+
+top 10 largest processes by resident memory size
+
+```{r}
+arrange(procs, desc(resident_size)) %>% 
+  select(pid, name, uid, resident_size)
+```
+
+process count for the top 10 most active processes
+
+```{r}
+count(procs, name, sort=TRUE)
+```
+
+### get all processes listening on a port (join example)
+
+```{r}
+listen <- tbl(osqdb, "listening_ports")
+
+left_join(procs, listen, by="pid") %>%
+  filter(port != "") %>% 
+  distinct(name, port, address, pid)
+```
+
+### get file info
+
+```{r}
+files <- tbl(osqdb, "file")
+
+filter(files, path == "/etc/hosts") %>% 
+  select(filename, size)
+```
+
+### users
+
+```{r}
+tbl(osqdb, "users")
+
+tbl(osqdb, "logged_in_users")
+```
+
+### groups
+
+```{r}
+tbl(osqdb, "groups")
+```
+
+### homebrew!
+
+```{r}
+tbl(osqdb, "homebrew_packages")
 ```
