@@ -14,14 +14,11 @@ osquery_help <- function() {
   cat(call_osquery("--help"))
 }
 
-
-
-
-call_osquery(
-  c(
-    "--json",
-    "SELECT pid, name, path FROM processes"
-  )
-) -> a
-
-a
+ssh_osquery <- function(session, osquery_remote_path = "/usr/local/bin", args) {
+  if (is.null(osquery_remote_path)) osquery_remote_path <- "/usr/local/bin"
+  ssh_exec_internal(
+    session, paste0(c(file.path(osquery_remote_path, "osqueryi"), args), collapse = " ")
+  ) -> res
+  res$stdout <- rawToChar(res$stdout)
+  res
+}

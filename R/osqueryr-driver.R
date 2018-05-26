@@ -38,8 +38,18 @@ setMethod(
 #' @export
 setMethod(
   "dbConnect", "OsqueryDriver",
-  function(drv, ...) {
-    OsqueryConnection()
+  function(drv, host = NULL, keyfile = NULL, osquery_remote_path = NULL, ...) {
+    if (!is.null(host)) {
+      sess <- ssh_connect(host = host, keyfile = keyfile)
+    } else {
+      sess <- NULL
+    }
+    OsqueryConnection(
+      host = host,
+      keyfile = keyfile,
+      session = sess,
+      osquery_remote_path = osquery_remote_path
+    )
   }
 )
 

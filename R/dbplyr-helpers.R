@@ -36,3 +36,13 @@ sql_escape_ident.OsqueryConnection <- function(con, x) {
   # message(paste0(sprintf("[%s]", x)), collaspe=", ")
   ifelse(grepl("`", x), sql_quote(x, ' '), sql_quote(x, '`'))
 }
+
+
+#' @keywords internal
+#' @export
+db_desc.OsqueryConnection <- function(x) {
+
+  print(x@session)
+  NextMethod("db_desc", x)
+
+}

@@ -1,9 +1,15 @@
 #' @include osqueryr-driver.R
 NULL
 
-OsqueryConnection <- function() {
+OsqueryConnection <- function(host = NULL, keyfile = NULL, session = NULL, osquery_remote_path = NULL) {
   # TODO: Add arguments
-  new("OsqueryConnection")
+  new(
+    "OsqueryConnection",
+      host = host,
+      keyfile = keyfile,
+      session = session,
+      osquery_remote_path = osquery_remote_path
+  )
 }
 
 #' @rdname DBI
@@ -11,7 +17,12 @@ OsqueryConnection <- function() {
 setClass(
   "OsqueryConnection",
   contains = "DBIConnection",
-  slots = list()
+  slots = list(
+    host = "ANY",
+    keyfile = "ANY",
+    osquery_remote_path = "ANY",
+    session = "ANY"
+  )
 )
 
 #' @rdname DBI
@@ -21,7 +32,9 @@ setMethod(
   "show", "OsqueryConnection",
   function(object) {
     cat("<OsqueryConnection>\n")
-    # TODO: Print more details
+    if (!is.null(object@session)) {
+      print(object@session)
+    }
   })
 
 #' @rdname DBI
@@ -30,7 +43,9 @@ setMethod(
 setMethod(
   "dbIsValid", "OsqueryConnection",
   function(dbObj, ...) {
-    testthat::skip("Not yet implemented: dbIsValid(Connection)")
+    if (is.null(dbObj@host)) return(TRUE)
+    s <- ssh_info(dbObj@session)
+    return(TRUE)
   })
 
 #' @rdname DBI
@@ -39,8 +54,11 @@ setMethod(
 setMethod(
   "dbDisconnect", "OsqueryConnection",
   function(conn, ...) {
+    if (is.null(conn@host)) return(TRUE)
     if (!dbIsValid(conn)) {
       warning("Connection already closed.", call. = FALSE)
+    } else {
+      ssh_disconnect(conn@session)
     }
 
     # TODO: Free resources
@@ -129,7 +147,11 @@ setMethod(
   "dbListTables", "OsqueryConnection",
   function(conn, ...) {
     # message("dbListTables")
-    ret <- call_osquery(".tables")
+    if (is.null(conn@session)) {
+      ret <- call_osquery(".tables")
+    } else {
+      ret <- ssh_osquery(conn@session, conn@osquery_remote_path, ".tables")
+    }
     out <- strsplit(ret$stdout, "\n")[[1]]
     out <- gsub("^[[:space:]]*=>[[:space:]]*", "", out)
     out

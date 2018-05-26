@@ -45,9 +45,17 @@ setMethod(
 
     # message("dbFetch")
 
-    call_osquery(
-      c("--json", res@statement)
-    ) -> ret
+    if (is.null(res@connection@session)) {
+      call_osquery(
+        c("--json", res@statement)
+      ) -> ret
+    } else {
+      ssh_osquery(
+        res@connection@session,
+        res@connection@osquery_remote_path,
+        c("--json", res@statement)
+      ) -> ret
+    }
 
     out <- jsonlite::fromJSON(ret$stdout)
 

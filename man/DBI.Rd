@@ -46,7 +46,8 @@
 \usage{
 \S4method{show}{OsqueryDriver}(object)
 
-\S4method{dbConnect}{OsqueryDriver}(drv, ...)
+\S4method{dbConnect}{OsqueryDriver}(drv, host = NULL, keyfile = NULL,
+  osquery_remote_path = NULL, ...)
 
 \S4method{dbDataType}{OsqueryDriver,ANY}(dbObj, obj, ...)
 

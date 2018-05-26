@@ -37,7 +37,6 @@ _Pretty much what you'd expect for `DBI` and `dbplyr`._
 
 ## TODO (y'all are encouraged to contribute)
 
-- support ssh'ing into remote systems to execute `osqueryi` (so perhaps need an "osquery connection string" thing)
 - finish DBI driver
 - smart(er) type conversion
 - tests
@@ -71,6 +70,28 @@ packageVersion("osqueryr")
 osqdb <- src_dbi(osqueryr::dbConnect(Osquery()))
 
 glimpse(tbl(osqdb, "osquery_info"))
+```
+
+This can work with remote hosts, too:
+
+```{r cache=TRUE}
+con <- osqueryr::dbConnect(Osquery())
+con
+
+local_db <- src_dbi(con)
+local_db
+
+osq1_con <- osqueryr::dbConnect(Osquery(), host = "hrbrmstr@osq1")
+osq1_con
+
+osq1_db <- src_dbi(osq1_con)
+osq1_db
+
+osq2_con <- osqueryr::dbConnect(Osquery(), host = "bob@osq2", osquery_remote_path = "/usr/bin")
+osq2_con
+
+osq2_db <- src_dbi(osq2_con)
+osq2_db
 ```
 
 ### available tables
