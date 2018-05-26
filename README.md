@@ -11,6 +11,13 @@ NOTE: You need to install `osquery` for this to work.
 
 Read <https://osquery.readthedocs.io/en/stable/> before proceeding.
 
+## HEY\!
+
+One of the super cool things abt `osquery` is that it works on every
+major platform so you can use this package to normalize OS-level queries
+for anything that you may have wanted to do before but didn’t feel like
+doing b/c you had to handle so many OS foibles.
+
 ## Description
 
 ‘osquery’ <https://osquery.readthedocs.io/en/stable/> is an operating
@@ -23,6 +30,17 @@ analytic idioms.
 ## What’s Inside The Tin
 
 The following functions are implemented:
+
+*Pretty much what you’d expect for `DBI` and `dbplyr`.*
+
+## TODO (y’all are encouraged to contribute)
+
+  - support ssh’ing into remote systems to execute `osqueryi` (so
+    perhaps need an “osquery connection string” thing)
+  - finish DBI driver
+  - smart(er) type conversion
+  - tests
+  - vignette(s)
 
 ## Installation
 
@@ -58,9 +76,9 @@ glimpse(tbl(osqdb, "osquery_info"))
     ## $ config_hash    <chr> ""
     ## $ config_valid   <chr> "0"
     ## $ extensions     <chr> "inactive"
-    ## $ instance_id    <chr> "8893b98b-75e4-4a41-8e1c-76a49a907431"
-    ## $ pid            <chr> "77146"
-    ## $ start_time     <chr> "1527338257"
+    ## $ instance_id    <chr> "80fb3b10-932c-4f2a-9127-79145d9636cf"
+    ## $ pid            <chr> "77650"
+    ## $ start_time     <chr> "1527339946"
     ## $ uuid           <chr> "3A087DAC-6414-5FA9-9E10-42EE9CED7C25"
     ## $ version        <chr> "3.2.4"
     ## $ watcher        <chr> "-1"
@@ -121,15 +139,15 @@ filter(procs, cmdline != "") %>%
     ## # Database: OsqueryConnection
     ##    cmdline                                                                                                   total_size
     ##    <chr>                                                                                                     <chr>     
-    ##  1 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow console                           74514432  
+    ##  1 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow console                           74518528  
     ##  2 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdwor… 17145856  
-    ##  3 /usr/sbin/cfprefsd agent                                                                                  8843264   
-    ##  4 /usr/libexec/lsd                                                                                          26931200  
+    ##  3 /usr/sbin/cfprefsd agent                                                                                  8810496   
+    ##  4 /usr/libexec/lsd                                                                                          26939392  
     ##  5 /usr/libexec/trustd --agent                                                                               40603648  
-    ##  6 /usr/sbin/distnoted agent                                                                                 13660160  
+    ##  6 /usr/sbin/distnoted agent                                                                                 13791232  
     ##  7 /usr/libexec/secd                                                                                         26746880  
-    ##  8 /usr/libexec/UserEventAgent (Aqua)                                                                        9281536   
-    ##  9 /System/Library/Frameworks/CoreTelephony.framework/Support/CommCenter -L                                  8933376   
+    ##  8 /usr/libexec/UserEventAgent (Aqua)                                                                        9289728   
+    ##  9 /System/Library/Frameworks/CoreTelephony.framework/Support/CommCenter -L                                  8953856   
     ## 10 /usr/libexec/languageassetd --firstLogin                                                                  8474624   
     ## # ... with more rows
 
@@ -142,8 +160,8 @@ filter(procs, name %like% '%fire%') %>%
     ## Variables: 26
     ## $ cmdline            <chr> "/Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox -foreground"
     ## $ cwd                <chr> "/"
-    ## $ disk_bytes_read    <chr> "658833408"
-    ## $ disk_bytes_written <chr> "9126772736"
+    ## $ disk_bytes_read    <chr> "682745856"
+    ## $ disk_bytes_written <chr> "9430757376"
     ## $ egid               <chr> "20"
     ## $ euid               <chr> "502"
     ## $ gid                <chr> "20"
@@ -154,17 +172,17 @@ filter(procs, name %like% '%fire%') %>%
     ## $ path               <chr> "/Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox"
     ## $ pgroup             <chr> "72338"
     ## $ pid                <chr> "72338"
-    ## $ resident_size      <chr> "1530167296"
+    ## $ resident_size      <chr> "1618235392"
     ## $ root               <chr> ""
     ## $ sgid               <chr> "20"
     ## $ start_time         <chr> "355185"
     ## $ state              <chr> "R"
     ## $ suid               <chr> "502"
-    ## $ system_time        <chr> "1007217"
-    ## $ threads            <chr> "82"
-    ## $ total_size         <chr> "1139310592"
+    ## $ system_time        <chr> "1051117"
+    ## $ threads            <chr> "86"
+    ## $ total_size         <chr> "1190350848"
     ## $ uid                <chr> "502"
-    ## $ user_time          <chr> "2350535"
+    ## $ user_time          <chr> "2435277"
     ## $ wired_size         <chr> "0"
 
 see if any processes have no corresponding disk image
@@ -191,16 +209,16 @@ arrange(procs, desc(resident_size)) %>%
     ## # Ordered by: desc(resident_size)
     ##    name                  pid   resident_size uid  
     ##    <chr>                 <chr> <chr>         <chr>
-    ##  1 java                  54764 4001574912    502  
+    ##  1 java                  54764 4002054144    502  
     ##  2 com.docker.hyperkit   28543 2868310016    502  
-    ##  3 firefox               72338 1530167296    502  
-    ##  4 plugin-container      58603 714211328     502  
-    ##  5 plugin-container      58699 663666688     502  
-    ##  6 Adobe Desktop Service 1242  609406976     502  
-    ##  7 RStudio               54892 516149248     502  
-    ##  8 plugin-container      72343 515313664     502  
-    ##  9 plugin-container      58708 511750144     502  
-    ## 10 Finder                1073  469741568     502  
+    ##  3 firefox               72338 1618243584    502  
+    ##  4 plugin-container      58603 749813760     502  
+    ##  5 plugin-container      58699 650633216     502  
+    ##  6 plugin-container      58708 619425792     502  
+    ##  7 Adobe Desktop Service 1242  609980416     502  
+    ##  8 plugin-container      72343 560459776     502  
+    ##  9 RStudio               54892 516141056     502  
+    ## 10 Finder                1073  469733376     502  
     ## # ... with more rows
 
 process count for the top 10 most active processes
@@ -215,15 +233,15 @@ count(procs, name, sort=TRUE)
     ##    n     name                
     ##    <chr> <chr>               
     ##  1 17    MTLCompilerService  
-    ##  2 11    mdworker            
-    ##  3 6     Dropbox             
-    ##  4 6     Google Chrome Helper
-    ##  5 6     bash                
-    ##  6 5     QtWebEngineProcess  
-    ##  7 5     RStudio             
-    ##  8 5     distnoted           
-    ##  9 5     garcon              
-    ## 10 5     iTerm2              
+    ##  2 15    mdworker            
+    ##  3 7     bash                
+    ##  4 6     Dropbox             
+    ##  5 6     Google Chrome Helper
+    ##  6 6     iTerm2              
+    ##  7 6     ssh                 
+    ##  8 5     QtWebEngineProcess  
+    ##  9 5     RStudio             
+    ## 10 5     distnoted           
     ## # ... with more rows
 
 ### get all processes listening on a port (join example)
@@ -302,7 +320,7 @@ tbl(osqdb, "logged_in_users")
     ##  3 ""    38811 1527183574 ttys002 user  hrbrmstr
     ##  4 ""    58254 1527270314 ttys003 user  hrbrmstr
     ##  5 ""    61685 1527275702 ttys004 user  hrbrmstr
-    ##  6 ""    61495 1527275058 ttys005 dead  hrbrmstr
+    ##  6 ""    77365 1527339313 ttys005 user  hrbrmstr
     ##  7 ""    52333 1526658865 ttys006 dead  hrbrmstr
     ##  8 ""    54350 1526670699 ttys007 dead  hrbrmstr
     ##  9 ""    55922 1526675872 ttys008 dead  hrbrmstr
@@ -352,3 +370,9 @@ tbl(osqdb, "homebrew_packages")
     ##  9 armadillo    /usr/local/Cellar/armadillo/    8.500.0_1
     ## 10 arpack       /usr/local/Cellar/arpack/       3.5.0_1  
     ## # ... with more rows
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.

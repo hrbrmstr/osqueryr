@@ -14,6 +14,13 @@ NOTE: You need to install `osquery` for this to work.
 
 Read <https://osquery.readthedocs.io/en/stable/> before proceeding.
 
+## HEY!
+
+One of the super cool things abt `osquery` is that it works on every major platform
+so you can use this package to normalize OS-level queries for anything
+that you may have wanted to do before but didn't feel like doing b/c you had to
+handle so many OS foibles.
+
 ## Description
 
 'osquery' <https://osquery.readthedocs.io/en/stable/> is an operating 
@@ -25,6 +32,16 @@ interface is provided facilitating intuitive and tidy analytic idioms.
 ## What's Inside The Tin
 
 The following functions are implemented:
+
+_Pretty much what you'd expect for `DBI` and `dbplyr`._
+
+## TODO (y'all are encouraged to contribute)
+
+- support ssh'ing into remote systems to execute `osqueryi` (so perhaps need an "osquery connection string" thing)
+- finish DBI driver
+- smart(er) type conversion
+- tests
+- vignette(s)
 
 ## Installation
 
@@ -140,3 +157,7 @@ tbl(osqdb, "groups")
 ```{r}
 tbl(osqdb, "homebrew_packages")
 ```
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
