@@ -10,3 +10,4 @@
 ^doc$
 ^tmp$
 ^CONDUCT\.md$
+^README_cache$

@@ -74,9 +74,9 @@ glimpse(tbl(osqdb, "osquery_info"))
     ## $ config_hash    <chr> ""
     ## $ config_valid   <chr> "0"
     ## $ extensions     <chr> "inactive"
-    ## $ instance_id    <chr> "83819286-02c6-4cd0-a319-4416a893c62b"
-    ## $ pid            <chr> "45610"
-    ## $ start_time     <chr> "1527364562"
+    ## $ instance_id    <chr> "0bda930c-43ad-48cc-a324-23ca614aaa00"
+    ## $ pid            <chr> "45863"
+    ## $ start_time     <chr> "1527364673"
     ## $ uuid           <chr> "709F311C-B34D-5CF4-A111-91C8AA4E079B"
     ## $ version        <chr> "3.2.4"
     ## $ watcher        <chr> "-1"
@@ -257,14 +257,14 @@ filter(procs, cmdline != "") %>%
     ## # Database: OsqueryConnection
     ##    cmdline                                                                         total_size
     ##    <chr>                                                                           <chr>     
-    ##  1 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow console 45944832  
-    ##  2 /usr/sbin/cfprefsd agent                                                        4018176   
-    ##  3 /usr/libexec/UserEventAgent (Aqua)                                              6258688   
-    ##  4 /usr/sbin/distnoted agent                                                       16592896  
+    ##  1 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow console 45940736  
+    ##  2 /usr/sbin/cfprefsd agent                                                        4009984   
+    ##  3 /usr/libexec/UserEventAgent (Aqua)                                              6242304   
+    ##  4 /usr/sbin/distnoted agent                                                       16588800  
     ##  5 /System/Library/CoreServices/ControlStrip.app/Contents/MacOS/TouchBarAgent      3379200   
     ##  6 /usr/libexec/lsd                                                                18866176  
-    ##  7 /System/Library/Frameworks/CoreTelephony.framework/Support/CommCenter -L        7544832   
-    ##  8 /usr/libexec/trustd --agent                                                     13279232  
+    ##  7 /System/Library/Frameworks/CoreTelephony.framework/Support/CommCenter -L        7561216   
+    ##  8 /usr/libexec/trustd --agent                                                     13250560  
     ##  9 /usr/libexec/languageassetd --firstLogin                                        7131136   
     ## 10 /usr/libexec/secinitd                                                           14454784  
     ## # ... with more rows
@@ -278,8 +278,8 @@ filter(procs, name %like% '%fire%') %>%
     ## Variables: 26
     ## $ cmdline            <chr> "/usr/libexec/ApplicationFirewall/Firewall", "/Applications/FirefoxDeveloperEdition.app/...
     ## $ cwd                <chr> "/", "/"
-    ## $ disk_bytes_read    <chr> "8192", "261320704"
-    ## $ disk_bytes_written <chr> "0", "1746030592"
+    ## $ disk_bytes_read    <chr> "8192", "261332992"
+    ## $ disk_bytes_written <chr> "0", "1746137088"
     ## $ egid               <chr> "20", "20"
     ## $ euid               <chr> "501", "501"
     ## $ gid                <chr> "20", "20"
@@ -290,17 +290,17 @@ filter(procs, name %like% '%fire%') %>%
     ## $ path               <chr> "/usr/libexec/ApplicationFirewall/Firewall", "/Applications/FirefoxDeveloperEdition.app/...
     ## $ pgroup             <chr> "28329", "39010"
     ## $ pid                <chr> "28329", "39010"
-    ## $ resident_size      <chr> "32768", "1188732928"
+    ## $ resident_size      <chr> "32768", "1188757504"
     ## $ root               <chr> "", ""
     ## $ sgid               <chr> "20", "20"
     ## $ start_time         <chr> "1089108", "1216586"
     ## $ state              <chr> "R", "R"
     ## $ suid               <chr> "501", "501"
-    ## $ system_time        <chr> "3", "289243"
-    ## $ threads            <chr> "2", "66"
-    ## $ total_size         <chr> "647168", "1064349696"
+    ## $ system_time        <chr> "3", "289281"
+    ## $ threads            <chr> "2", "65"
+    ## $ total_size         <chr> "647168", "1064378368"
     ## $ uid                <chr> "501", "501"
-    ## $ user_time          <chr> "6", "768624"
+    ## $ user_time          <chr> "6", "768714"
     ## $ wired_size         <chr> "0", "0"
 
 see if any processes have no corresponding disk image
@@ -329,16 +329,16 @@ arrange(procs, desc(resident_size)) %>%
     ## # Ordered by: desc(resident_size)
     ##    name                  pid   resident_size uid  
     ##    <chr>                 <chr> <chr>         <chr>
-    ##  1 java                  35914 1434927104    501  
-    ##  2 firefox               39010 1188732928    501  
-    ##  3 RStudio               42595 724598784     501  
-    ##  4 plugin-container      40130 613318656     501  
+    ##  1 java                  35914 1434951680    501  
+    ##  2 firefox               39010 1188757504    501  
+    ##  3 RStudio               42595 745156608     501  
+    ##  4 plugin-container      40130 613330944     501  
     ##  5 plugin-container      39014 499740672     501  
     ##  6 plugin-container      42533 304885760     501  
     ##  7 plugin-container      42666 277454848     501  
-    ##  8 plugin-container      45069 268746752     501  
-    ##  9 Adobe Desktop Service 642   252452864     501  
-    ## 10 Messages              43128 203522048     501  
+    ##  8 plugin-container      45069 268763136     501  
+    ##  9 Adobe Desktop Service 642   252526592     501  
+    ## 10 Messages              43128 203517952     501  
     ## # ... with more rows
 
 process count for the top 10 most active processes
@@ -354,15 +354,15 @@ count(procs, name, sort=TRUE)
     ##    n     name                                    
     ##    <chr> <chr>                                   
     ##  1 15    MTLCompilerService                      
-    ##  2 11    mdworker                                
+    ##  2 9     mdworker                                
     ##  3 6     Dropbox                                 
     ##  4 6     ssh                                     
-    ##  5 5     bash                                    
-    ##  6 5     plugin-container                        
-    ##  7 4     com.apple.CommerceKit.TransactionService
-    ##  8 4     distnoted                               
-    ##  9 4     iTerm2                                  
-    ## 10 4     trustd                                  
+    ##  5 5     plugin-container                        
+    ##  6 4     com.apple.CommerceKit.TransactionService
+    ##  7 4     distnoted                               
+    ##  8 4     trustd                                  
+    ##  9 3     ACCFinderSync                           
+    ## 10 3     AdobeCRDaemon                           
     ## # ... with more rows
 
 ### get all processes listening on a port (join example)
@@ -442,9 +442,9 @@ tbl(osqdb, "logged_in_users")
     ##    <chr> <chr> <chr>      <chr>   <chr> <chr>
     ##  1 ""    111   1526120904 console user  bob  
     ##  2 ""    40196 1527301872 ttys001 user  bob  
-    ##  3 ""    45313 1527364233 ttys002 user  bob  
+    ##  3 ""    45313 1527364233 ttys002 dead  bob  
     ##  4 ""    36182 1527218774 ttys003 dead  bob  
-    ##  5 ""    45379 1527364355 ttys004 user  bob  
+    ##  5 ""    45379 1527364355 ttys004 dead  bob  
     ##  6 ""    67343 1527010299 ttys005 dead  bob  
     ##  7 ""    4386  1527013112 ttys006 dead  bob  
     ##  8 ""    56171 1527005765 tty??   dead  bob  
