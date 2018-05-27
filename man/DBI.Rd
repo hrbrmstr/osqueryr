@@ -10,7 +10,6 @@
 \alias{dbDataType,OsqueryDriver,ANY-method}
 \alias{dbDataType,OsqueryDriver,list-method}
 \alias{dbIsValid,OsqueryDriver-method}
-\alias{dbGetInfo,OsqueryDriver-method}
 \alias{OsqueryConnection-class}
 \alias{show,OsqueryConnection-method}
 \alias{dbIsValid,OsqueryConnection-method}
@@ -20,28 +19,17 @@
 \alias{dbDataType,OsqueryConnection,ANY-method}
 \alias{dbQuoteString,OsqueryConnection,character-method}
 \alias{dbQuoteIdentifier,OsqueryConnection,character-method}
-\alias{dbWriteTable,OsqueryConnection,character,data.frame-method}
 \alias{dbReadTable,OsqueryConnection,character-method}
 \alias{dbListTables,OsqueryConnection-method}
 \alias{dbExistsTable,OsqueryConnection,character-method}
 \alias{dbListFields,OsqueryConnection,character-method}
-\alias{dbRemoveTable,OsqueryConnection,character-method}
-\alias{dbGetInfo,OsqueryConnection-method}
-\alias{dbBegin,OsqueryConnection-method}
-\alias{dbCommit,OsqueryConnection-method}
-\alias{dbRollback,OsqueryConnection-method}
 \alias{OsqueryResult-class}
 \alias{show,OsqueryResult-method}
 \alias{dbClearResult,OsqueryResult-method}
 \alias{dbFetch,OsqueryResult-method}
 \alias{dbHasCompleted,OsqueryResult-method}
-\alias{dbGetInfo,OsqueryResult-method}
 \alias{dbIsValid,OsqueryResult-method}
 \alias{dbGetStatement,OsqueryResult-method}
-\alias{dbColumnInfo,OsqueryResult-method}
-\alias{dbGetRowCount,OsqueryResult-method}
-\alias{dbGetRowsAffected,OsqueryResult-method}
-\alias{dbBind,OsqueryResult-method}
 \title{DBI methods}
 \usage{
 \S4method{show}{OsqueryDriver}(object)
@@ -54,8 +42,6 @@
 \S4method{dbDataType}{OsqueryDriver,list}(dbObj, obj, ...)
 
 \S4method{dbIsValid}{OsqueryDriver}(dbObj, ...)
-
-\S4method{dbGetInfo}{OsqueryDriver}(dbObj, ...)
 
 \S4method{show}{OsqueryConnection}(object)
 
@@ -73,9 +59,6 @@
 
 \S4method{dbQuoteIdentifier}{OsqueryConnection,character}(conn, x, ...)
 
-\S4method{dbWriteTable}{OsqueryConnection,character,data.frame}(conn, name,
-  value, overwrite = FALSE, append = FALSE, ...)
-
 \S4method{dbReadTable}{OsqueryConnection,character}(conn, name, ...)
 
 \S4method{dbListTables}{OsqueryConnection}(conn, ...)
@@ -83,16 +66,6 @@
 \S4method{dbExistsTable}{OsqueryConnection,character}(conn, name, ...)
 
 \S4method{dbListFields}{OsqueryConnection,character}(conn, name, ...)
-
-\S4method{dbRemoveTable}{OsqueryConnection,character}(conn, name, ...)
-
-\S4method{dbGetInfo}{OsqueryConnection}(dbObj, ...)
-
-\S4method{dbBegin}{OsqueryConnection}(conn, ...)
-
-\S4method{dbCommit}{OsqueryConnection}(conn, ...)
-
-\S4method{dbRollback}{OsqueryConnection}(conn, ...)
 
 \S4method{show}{OsqueryResult}(object)
 
@@ -102,19 +75,9 @@
 
 \S4method{dbHasCompleted}{OsqueryResult}(res, ...)
 
-\S4method{dbGetInfo}{OsqueryResult}(dbObj, ...)
-
 \S4method{dbIsValid}{OsqueryResult}(dbObj, ...)
 
 \S4method{dbGetStatement}{OsqueryResult}(res, ...)
-
-\S4method{dbColumnInfo}{OsqueryResult}(res, ...)
-
-\S4method{dbGetRowCount}{OsqueryResult}(res, ...)
-
-\S4method{dbGetRowsAffected}{OsqueryResult}(res, ...)
-
-\S4method{dbBind}{OsqueryResult}(res, params, ...)
 }
 \arguments{
 \item{object}{Any R object}
@@ -151,22 +114,12 @@ or \linkS4class{DBIConnection}}
 \item{name}{A character string specifying the unquoted DBMS table name,
 or the result of a call to \code{\link[=dbQuoteIdentifier]{dbQuoteIdentifier()}}.}
 
-\item{value}{a \link{data.frame} (or coercible to data.frame).}
-
-\item{overwrite}{Allow overwriting the destination table. Cannot be
-`TRUE` if `append` is also `TRUE`.}
-
-\item{append}{Allow appending to the destination table. Cannot be
-`TRUE` if `overwrite` is also `TRUE`.}
-
 \item{res}{An object inheriting from \linkS4class{DBIResult}.}
 
 \item{n}{maximum number of records to retrieve per fetch. Use \code{n = -1}
 or \code{n = Inf}
 to retrieve all pending records.  Some implementations may recognize other
 special values.}
-
-\item{params}{A list of bindings, named or unnamed.}
 }
 \description{
 Implementations of pure virtual functions defined in the `DBI` package.

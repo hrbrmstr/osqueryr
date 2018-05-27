@@ -12,6 +12,6 @@ TBD.
 \examples{
 \dontrun{
 #' library(DBI)
-ROsquery::Osquery()
+osqueryr::Osquery()
 }
 }

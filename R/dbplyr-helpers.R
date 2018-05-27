@@ -44,7 +44,7 @@ sql_escape_ident.OsqueryConnection <- function(con, x) {
 #' @export
 db_desc.OsqueryConnection <- function(x) {
 
-  print(x@session)
+  if (!is.null(x@session)) print(x@session)
   NextMethod("db_desc", x)
 
 }

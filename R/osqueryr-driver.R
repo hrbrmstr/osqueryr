@@ -13,7 +13,7 @@ NULL
 #' @examples
 #' \dontrun{
 #' #' library(DBI)
-#' ROsquery::Osquery()
+#' osqueryr::Osquery()
 #' }
 Osquery <- function() {
   new("OsqueryDriver")
@@ -91,11 +91,11 @@ setMethod(
     testthat::skip("Not yet implemented: dbIsValid(Driver)")
   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbGetInfo
-#' @export
-setMethod(
-  "dbGetInfo", "OsqueryDriver",
-  function(dbObj, ...) {
-    testthat::skip("Not yet implemented: dbGetInfo(Driver)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbGetInfo
+# @export
+# setMethod(
+#   "dbGetInfo", "OsqueryDriver",
+#   function(dbObj, ...) {
+#
+#   })

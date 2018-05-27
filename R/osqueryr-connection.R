@@ -5,10 +5,10 @@ OsqueryConnection <- function(host = NULL, keyfile = NULL, session = NULL, osque
   # TODO: Add arguments
   new(
     "OsqueryConnection",
-      host = host,
-      keyfile = keyfile,
-      session = session,
-      osquery_remote_path = osquery_remote_path
+    host = host,
+    keyfile = keyfile,
+    session = session,
+    osquery_remote_path = osquery_remote_path
   )
 }
 
@@ -118,18 +118,18 @@ setMethod(
     getMethod("dbQuoteIdentifier", c("DBIConnection", "character"), asNamespace("DBI"))(conn, x, ...)
   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbWriteTable
-#' @param overwrite Allow overwriting the destination table. Cannot be
-#'   `TRUE` if `append` is also `TRUE`.
-#' @param append Allow appending to the destination table. Cannot be
-#'   `TRUE` if `overwrite` is also `TRUE`.
-#' @export
-setMethod(
-  "dbWriteTable", c("OsqueryConnection", "character", "data.frame"),
-  function(conn, name, value, overwrite = FALSE, append = FALSE, ...) {
-    testthat::skip("Not yet implemented: dbWriteTable(Connection, character, data.frame)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbWriteTable
+# @param overwrite Allow overwriting the destination table. Cannot be
+#   `TRUE` if `append` is also `TRUE`.
+# @param append Allow appending to the destination table. Cannot be
+#   `TRUE` if `overwrite` is also `TRUE`.
+# @export
+# setMethod(
+#   "dbWriteTable", c("OsqueryConnection", "character", "data.frame"),
+#   function(conn, name, value, overwrite = FALSE, append = FALSE, ...) {
+#     testthat::skip("Not yet implemented: dbWriteTable(Connection, character, data.frame)")
+#   })
 
 #' @rdname DBI
 #' @inheritParams DBI::dbReadTable
@@ -137,7 +137,11 @@ setMethod(
 setMethod(
   "dbReadTable", c("OsqueryConnection", "character"),
   function(conn, name, ...) {
-    testthat::skip("Not yet implemented: dbReadTable(Connection, character)")
+    if (dbExistsTable(conn, name)) {
+      dbGetQuery(conn, sprintf("SELECT * FROM %s", name))
+    } else {
+      NULL
+    }
   })
 
 #' @rdname DBI
@@ -163,7 +167,14 @@ setMethod(
 setMethod(
   "dbExistsTable", c("OsqueryConnection", "character"),
   function(conn, name, ...) {
-    testthat::skip("Not yet implemented: dbExistsTable(Connection)")
+    if (is.null(conn@session)) {
+      ret <- call_osquery(".tables")
+    } else {
+      ret <- ssh_osquery(conn@session, conn@osquery_remote_path, ".tables")
+    }
+    out <- strsplit(ret$stdout, "\n")[[1]]
+    out <- gsub("^[[:space:]]*=>[[:space:]]*", "", out)
+    (name %in% out)
   })
 
 #' @rdname DBI
@@ -172,51 +183,41 @@ setMethod(
 setMethod(
   "dbListFields", c("OsqueryConnection", "character"),
   function(conn, name, ...) {
-    # message("dbListFields")
-    names(dbGetQuery(conn, paste('SELECT * FROM', name, 'LIMIT 1')))
+    unique(names(dbGetQuery(conn, paste('SELECT * FROM', name, 'LIMIT 1'))))
   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbRemoveTable
-#' @export
-setMethod(
-  "dbRemoveTable", c("OsqueryConnection", "character"),
-  function(conn, name, ...) {
-    testthat::skip("Not yet implemented: dbRemoveTable(Connection, character)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbRemoveTable
+# @export
+# setMethod(
+#   "dbRemoveTable", c("OsqueryConnection", "character"),
+#   function(conn, name, ...) {
+#     testthat::skip("Not yet implemented: dbRemoveTable(Connection, character)")
+#   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbGetInfo
-#' @export
-setMethod(
-  "dbGetInfo", "OsqueryConnection",
-  function(dbObj, ...) {
-    testthat::skip("Not yet implemented: dbGetInfo(Connection)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbBegin
+# @export
+# setMethod(
+#   "dbBegin", "OsqueryConnection",
+#   function(conn, ...) {
+#     testthat::skip("Not yet implemented: dbBegin(Connection)")
+#   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbBegin
-#' @export
-setMethod(
-  "dbBegin", "OsqueryConnection",
-  function(conn, ...) {
-    testthat::skip("Not yet implemented: dbBegin(Connection)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbCommit
+# @export
+# setMethod(
+#   "dbCommit", "OsqueryConnection",
+#   function(conn, ...) {
+#     testthat::skip("Not yet implemented: dbCommit(Connection)")
+#   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbCommit
-#' @export
-setMethod(
-  "dbCommit", "OsqueryConnection",
-  function(conn, ...) {
-    testthat::skip("Not yet implemented: dbCommit(Connection)")
-  })
-
-#' @rdname DBI
-#' @inheritParams DBI::dbRollback
-#' @export
-setMethod(
-  "dbRollback", "OsqueryConnection",
-  function(conn, ...) {
-    testthat::skip("Not yet implemented: dbRollback(Connection)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbRollback
+# @export
+# setMethod(
+#   "dbRollback", "OsqueryConnection",
+#   function(conn, ...) {
+#     testthat::skip("Not yet implemented: dbRollback(Connection)")
+#   })

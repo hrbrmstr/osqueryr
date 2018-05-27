@@ -76,15 +76,15 @@ setMethod(
     TRUE
   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbGetInfo
-#' @export
-setMethod(
-  "dbGetInfo", "OsqueryResult",
-  function(dbObj, ...) {
-    # Optional
-    getMethod("dbGetInfo", "DBIResult", asNamespace("DBI"))(dbObj, ...)
-  })
+# @rdname DBI
+# @inheritParams DBI::dbGetInfo
+# @export
+# setMethod(
+#   "dbGetInfo", "OsqueryResult",
+#   function(dbObj, ...) {
+#     # Optional
+#     getMethod("dbGetInfo", "DBIResult", asNamespace("DBI"))(dbObj, ...)
+#   })
 
 #' @rdname DBI
 #' @inheritParams DBI::dbIsValid
@@ -92,7 +92,7 @@ setMethod(
 setMethod(
   "dbIsValid", "OsqueryResult",
   function(dbObj, ...) {
-    testthat::skip("Not yet implemented: dbIsValid(Result)")
+    TRUE
   })
 
 #' @rdname DBI
@@ -101,41 +101,40 @@ setMethod(
 setMethod(
   "dbGetStatement", "OsqueryResult",
   function(res, ...) {
-    testthat::skip("Not yet implemented: dbGetStatement(Result)")
+    res@statement
   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbColumnInfo
-#' @export
-setMethod(
-  "dbColumnInfo", "OsqueryResult",
-  function(res, ...) {
-    testthat::skip("Not yet implemented: dbColumnInfo(Result)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbColumnInfo
+# @export
+# setMethod(
+#   "dbColumnInfo", "OsqueryResult",
+#   function(res, ...) {
+#   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbGetRowCount
-#' @export
-setMethod(
-  "dbGetRowCount", "OsqueryResult",
-  function(res, ...) {
-    testthat::skip("Not yet implemented: dbGetRowCount(Result)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbGetRowCount
+# @export
+# setMethod(
+#   "dbGetRowCount", "OsqueryResult",
+#   function(res, ...) {
+#     testthat::skip("Not yet implemented: dbGetRowCount(Result)")
+#   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbGetRowsAffected
-#' @export
-setMethod(
-  "dbGetRowsAffected", "OsqueryResult",
-  function(res, ...) {
-    testthat::skip("Not yet implemented: dbGetRowsAffected(Result)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbGetRowsAffected
+# @export
+# setMethod(
+#   "dbGetRowsAffected", "OsqueryResult",
+#   function(res, ...) {
+#     testthat::skip("Not yet implemented: dbGetRowsAffected(Result)")
+#   })
 
-#' @rdname DBI
-#' @inheritParams DBI::dbBind
-#' @export
-setMethod(
-  "dbBind", "OsqueryResult",
-  function(res, params, ...) {
-    testthat::skip("Not yet implemented: dbBind(Result)")
-  })
+# @rdname DBI
+# @inheritParams DBI::dbBind
+# @export
+# setMethod(
+#   "dbBind", "OsqueryResult",
+#   function(res, params, ...) {
+#     testthat::skip("Not yet implemented: dbBind(Result)")
+#   })
