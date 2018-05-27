@@ -123,6 +123,15 @@
 or an existing \linkS4class{DBIConnection}
 object (in order to clone an existing connection).}
 
+\item{host}{\code{NULL} (default) if using \code{osqueryi} locally; an ssh server string of the
+form \code{[user@]hostname[:@port]}}
+
+\item{keyfile}{\code{NULL} (default) if using \code{osqueryi} locally; path to private key file.
+Must be in OpenSSH format (see details)}
+
+\item{osquery_remote_path}{if connecting to a remote system and \code{osqueryi} is not on
+the \code{PATH} for the \code{ssh} connection, provide it here. Ignored if using locally.}
+
 \item{...}{authentication arguments needed by the DBMS instance; these
 typically include \code{user}, \code{password}, \code{host}, \code{port}, \code{dbname}, etc.
 For details see the appropriate \code{DBIDriver}.}

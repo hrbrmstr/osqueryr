@@ -23,13 +23,14 @@ Suggests:
     covr
 Depends:
     R (>= 3.2.0),
+    DBI (>= 0.3.0),
     dbplyr
 Imports:
-    DBI (>= 0.3.0),
     methods,
     sys,
     jsonlite,
-    stringi
+    stringi,
+    ssh
 Remotes:
    jeroen/ssh
 RoxygenNote: 6.0.1.9000

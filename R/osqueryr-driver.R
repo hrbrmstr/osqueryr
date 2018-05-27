@@ -35,6 +35,13 @@ setMethod(
 
 #' @rdname DBI
 #' @inheritParams DBI::dbConnect
+#' @md
+#' @param host `NULL` (default) if using `osqueryi` locally; an ssh server string of the
+#'        form `[user@]hostname[:@port]`
+#' @param keyfile `NULL` (default) if using `osqueryi` locally; path to private key file.
+#'        Must be in OpenSSH format (see details)
+#' @param osquery_remote_path if connecting to a remote system and `osqueryi` is not on
+#'        the `PATH` for the `ssh` connection, provide it here. Ignored if using locally.
 #' @export
 setMethod(
   "dbConnect", "OsqueryDriver",
