@@ -37,3 +37,16 @@ test_that("dbplyr/dplyr components work", {
   expect_true(inherits(dplyr::tbl(local_db, "dns_resolvers"), "tbl_dbi"))
 
 })
+
+context("remote components work")
+test_that("remote components work", {
+
+  osq1_con <- DBI::dbConnect(Osquery(), host = "hrbrmstr@osq1")
+  expect_true(inherits(osq1_con, "OsqueryConnection"))
+
+  osq1_db <- src_dbi(osq1_con)
+  expect_true(inherits(osq1_db, "src_dbi"))
+
+  expect_true(inherits(dplyr::tbl(osq1_db, "processes"), "tbl_dbi"))
+
+})

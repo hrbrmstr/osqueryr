@@ -183,7 +183,7 @@ setMethod(
 setMethod(
   "dbListFields", c("OsqueryConnection", "character"),
   function(conn, name, ...) {
-    unique(names(dbGetQuery(conn, paste('SELECT * FROM', name, 'LIMIT 1'))))
+    names(dbGetQuery(conn, paste('SELECT * FROM', name, 'LIMIT 1')))
   })
 
 # @rdname DBI
