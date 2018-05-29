@@ -19,6 +19,7 @@ SystemRequirements: osquery
 Encoding: UTF-8
 License: MIT + file LICENSE
 Suggests:
+    ndjson,
     testthat,
     covr
 Depends:
@@ -35,9 +36,13 @@ Remotes:
    jeroen/ssh
 RoxygenNote: 6.0.1.9000
 Collate: 
+    'daemon.R'
     'dbplyr-helpers.R'
+    'expose.R'
+    'logs.R'
     'osqueryr-driver.R'
     'osqueryr-connection.R'
     'osqueryr-package.R'
     'osqueryr-result.R'
     'utils.R'
+    'zzz.R'

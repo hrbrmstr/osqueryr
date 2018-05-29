@@ -27,18 +27,22 @@ monitoring both performant and intuitive. A full ‘dbplyr’-compliant
 ‘DBI’-driver interface is provided facilitating intuitive and tidy
 analytic idioms.
 
-## What’s Inside The Tin
+## What's Inside The Tin
+
+_Pretty much what you'd expect for `DBI` and `dbplyr`_ plus:
 
 The following functions are implemented:
 
-*Pretty much what you’d expect for `DBI` and `dbplyr`.*
+- `osq_fs_logs`:	List all the logs on our local system
+- `osq_expose_tables`:	Return all (or selected) local or remote osquery tables as a named list of `dbplyr` tibbles
+- `osq_load_tables`:	Return all (or selected) local or remote osquery tables as a named list of `dbplyr` tibbles
 
-## TODO (y’all are encouraged to contribute)
+## TODO (y'all are encouraged to contribute)
 
-  - finish DBI driver
-  - smart(er) type conversion
-  - tests
-  - vignette(s)
+- <strike>finish DBI driver</strike>
+- smart(er) type conversion
+- tests
+- vignette(s)
 
 ## Installation
 
