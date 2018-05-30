@@ -20,6 +20,7 @@ Encoding: UTF-8
 License: MIT + file LICENSE
 Suggests:
     ndjson,
+    anytime,
     testthat,
     covr
 Depends:
