@@ -60,7 +60,7 @@ osq_load_tables <- function(tables = ".*", prefix = NULL, host = NULL, keyfile =
   lapply(tbls, function(tbln) {
     genv_name <- paste0(prefix, tbln, collapse="")
     if (!quiet) message("Wiring up '", tbln, "' as '", genv_name, ".")
-    tbl(osqdb, tbln)
+    dplyr::tbl(osqdb, tbln)
   }) -> out
 
   stats::setNames(out, tbls)

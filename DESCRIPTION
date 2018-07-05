@@ -27,14 +27,14 @@ Depends:
     R (>= 3.2.0),
     DBI (>= 0.3.0),
     dbplyr
-Imports:
+Imports: 
     methods,
     sys,
     jsonlite,
     stringi,
-    ssh
-Remotes:
-   jeroen/ssh
+    ssh,
+    dplyr,
+    magrittr
 RoxygenNote: 6.0.1.9000
 Collate: 
     'daemon.R'
@@ -45,5 +45,6 @@ Collate:
     'osqueryr-connection.R'
     'osqueryr-package.R'
     'osqueryr-result.R'
+    'utils-pipe.R'
     'utils.R'
     'zzz.R'

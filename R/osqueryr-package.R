@@ -12,6 +12,6 @@
 #' @author Bob Rudis (bob@@rud.is)
 #' @import DBI methods sys stringi dbplyr
 #' @importFrom jsonlite fromJSON
-
+#' @importFrom dplyr tbl
 #' @import ssh
 NULL
