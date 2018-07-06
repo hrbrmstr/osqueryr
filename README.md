@@ -47,7 +47,8 @@ The following functions are implemented:
 ## Installation
 
 ``` r
-devtools::install_github("hrbrmstr/osqueryr")
+devtools::install_git("git://gitlab.com/hrbrmstr/osqueryr")
+devtools::install_git("git://github.com/hrbrmstr/osqueryr")
 ```
 
 ## Usage
